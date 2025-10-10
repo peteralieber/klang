@@ -23,6 +23,12 @@ make
 
 This creates the `klang` executable.
 
+### K Language Version
+
+A version of the compiler written in K language itself (`klang.k`) is included in the repository. However, due to a limitation in the compiler's handling of escaped single quotes in character literals (e.g., `'\''`), the K version cannot currently be bootstrapped to compile itself. This is a known issue that would require enhancing the escape sequence handling in the translator.
+
+The `klang.k` file serves as a comprehensive example of K language syntax and demonstrates that the language is capable of expressing complex programs like compilers.
+
 ## Usage
 
 Translate a K source file to C:
