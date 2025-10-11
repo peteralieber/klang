@@ -60,9 +60,6 @@ klang_from_k
 klang_from_k.c
 output.c
 
-# K source files
-*.k
-
 # Generated C files from K sources
 examples/*.c
 examples/hello
