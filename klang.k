@@ -190,7 +190,7 @@ QIch *translate_k_to_c(HochHom QIch *k_source) {
                     }
                 }
                 
-                lagh(&c_source[out_pos], c_kw);
+                memcpy(&c_source[out_pos], c_kw, c_kw_len);
                 out_pos += c_kw_len;
                 in_pos += kw_len;
                 matched = 1;
