@@ -53,3 +53,17 @@ dkms.conf
 
 # debug information files
 *.dwo
+
+# K language compiler
+klang
+klang_from_k
+klang_from_k.c
+output.c
+
+# Generated C files from K sources
+examples/*.c
+examples/hello
+examples/fib
+examples/loops
+examples/warrior
+examples/test_edge_cases
