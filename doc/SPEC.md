@@ -116,3 +116,31 @@ The K language compiler is a simple source-to-source translator that:
 3. Outputs valid C source code
 
 The semantic behavior is identical to C since K is simply a lexical transformation of C.
+
+## Identifier Naming
+
+### Apostrophes in Identifiers
+
+Klingon language uses the apostrophe (`'`) character in many words, and several K keywords contain apostrophes (e.g., `mI'`, `cha'`, `qaSpa'`). While these are valid in K source code, C does not allow apostrophes in identifiers.
+
+The compiler handles this by:
+- **Keywords with apostrophes**: Translated to their C equivalents (e.g., `mI'` → `int`, `cha'` → `printf`)
+- **User-defined identifiers with apostrophes**: Apostrophes are replaced with underscores (`_`) in the C output
+
+### Examples
+
+**K source code:**
+```k
+mI' count' = 10;
+mI' war'rior = 42;
+cha'("count = %d, warrior = %d\n", count', war'rior);
+```
+
+**Generated C code:**
+```c
+int count_ = 10;
+int war_rior = 42;
+printf("count = %d, warrior = %d\n", count_, war_rior);
+```
+
+This allows K programmers to use apostrophes naturally in their identifier names while ensuring the generated C code compiles correctly. The apostrophe character is preserved in string literals and comments.

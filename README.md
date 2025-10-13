@@ -81,6 +81,17 @@ Some common keyword translations:
 
 For a complete list of keywords and more examples, see [SPEC.md](SPEC.md).
 
+## Identifier Naming
+
+Klingon uses apostrophes (`'`) in many words. In K language, you can use apostrophes in your own identifier names (e.g., `my'variable`, `count'`), and the compiler will automatically convert them to underscores in the C output to ensure valid C code. Klingon keywords with apostrophes (like `mI'`, `cha'`) are always translated to their C equivalents.
+
+**Example:**
+```k
+mI' warrior'count = 5;  // Becomes: int warrior_count = 5;
+```
+
+See [SPEC.md](doc/SPEC.md) for more details.
+
 ## Examples
 
 The `examples/` directory contains sample K programs:
