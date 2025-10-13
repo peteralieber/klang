@@ -115,3 +115,7 @@ MIT License - see [LICENSE](LICENSE) file for details.
 ## Qapla'!
 
 May your code compile successfully and your programs run without bugs!
+
+## Disclaimer
+
+This is a non-commercial, fan-created work inspired by the Klingon language and the Star Trek universe. All related trademarks and copyrights remain the property of their respective owners. No ownership is claimed, and use is intended under fair use principles.
