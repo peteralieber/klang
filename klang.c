@@ -99,12 +99,49 @@ char *translate_k_to_c(const char *k_source) {
         }
         
         /* Handle character literals */
+        /* Only treat ' as char literal if it's not part of an identifier */
         if (k_source[in_pos] == '\'' && !in_string && !in_comment && !in_line_comment) {
-            if (in_pos == 0 || k_source[in_pos - 1] != '\\') {
-                in_char = !in_char;
+            int is_identifier_apostrophe = 0;
+            
+            /* If we're not already in a char literal, check if this is an identifier apostrophe */
+            if (!in_char) {
+                /* Check if this apostrophe is part of an identifier */
+                int prev_is_ident = (in_pos > 0 && 
+                                    (isalnum(k_source[in_pos - 1]) || k_source[in_pos - 1] == '_'));
+                int next_is_ident = (in_pos + 1 < source_len && 
+                                    (isalnum(k_source[in_pos + 1]) || k_source[in_pos + 1] == '_'));
+                
+                /* Apostrophe is part of identifier if:
+                 * - It's in the middle: prev and next are identifier chars (x'y)
+                 * - It's at the end: prev is identifier, next is not an apostrophe (var' = or var';)
+                 */
+                if (prev_is_ident && (in_pos + 1 >= source_len || k_source[in_pos + 1] != '\'')) {
+                    if (next_is_ident) {
+                        /* Middle of identifier: x'y */
+                        is_identifier_apostrophe = 1;
+                    } else {
+                        /* Possibly at end of identifier: var' */
+                        /* Make sure it's not the start of a char literal like = ' */
+                        /* Check if previous non-whitespace is an identifier */
+                        size_t prev_nonspace = in_pos - 1;
+                        while (prev_nonspace > 0 && isspace(k_source[prev_nonspace])) {
+                            prev_nonspace--;
+                        }
+                        if (isalnum(k_source[prev_nonspace]) || k_source[prev_nonspace] == '_') {
+                            is_identifier_apostrophe = 1;
+                        }
+                    }
+                }
             }
-            c_source[out_pos++] = k_source[in_pos++];
-            continue;
+            
+            if (!is_identifier_apostrophe) {
+                /* This is a character literal delimiter */
+                if (in_pos == 0 || k_source[in_pos - 1] != '\\') {
+                    in_char = !in_char;
+                }
+                c_source[out_pos++] = k_source[in_pos++];
+                continue;
+            }
         }
         
         /* Handle comments */
@@ -171,7 +208,34 @@ char *translate_k_to_c(const char *k_source) {
         }
         
         if (!matched) {
-            c_source[out_pos++] = k_source[in_pos++];
+            /* Handle apostrophes in user-defined identifiers */
+            /* Replace ' with _ if it's part of an identifier */
+            char current_char = k_source[in_pos];
+            if (current_char == '\'') {
+                /* Check if this apostrophe is part of an identifier */
+                /* It's an identifier apostrophe if preceded by alphanumeric/underscore */
+                /* and followed by alphanumeric/underscore */
+                int prev_is_ident = (in_pos > 0 && 
+                                    (isalnum(k_source[in_pos - 1]) || k_source[in_pos - 1] == '_'));
+                int next_is_ident = (in_pos + 1 < source_len && 
+                                    (isalnum(k_source[in_pos + 1]) || k_source[in_pos + 1] == '_'));
+                
+                if (prev_is_ident && next_is_ident) {
+                    /* Apostrophe in the middle of identifier */
+                    c_source[out_pos++] = '_';
+                    in_pos++;
+                } else if (prev_is_ident && in_pos + 1 < source_len && 
+                          !isalnum(k_source[in_pos + 1]) && k_source[in_pos + 1] != '_') {
+                    /* Apostrophe at the end of identifier */
+                    c_source[out_pos++] = '_';
+                    in_pos++;
+                } else {
+                    /* Regular apostrophe (char literal, etc.) */
+                    c_source[out_pos++] = k_source[in_pos++];
+                }
+            } else {
+                c_source[out_pos++] = k_source[in_pos++];
+            }
         }
     }
     

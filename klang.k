@@ -123,16 +123,53 @@ QIch *translate_k_to_c(HochHom QIch *k_source) {
         }
         
         /* Handle character literals */
+        /* Only treat ' as char literal if it's not part of an identifier */
         /* LIMITATION: The line below contains '\'' which causes the translator to fail.
          * This prevents klang.k from being compiled until the escape handling is fixed.
          * The comparison checks if the current character is a single quote (').
          */
         chugh (k_source[in_pos] == '\'' && !in_string && !in_comment && !in_line_comment) {
-            chugh (in_pos == 0 || k_source[in_pos - 1] != '\\') {
-                in_char = !in_char;
+            mI' is_identifier_apostrophe = 0;
+            
+            /* If we're not already in a char literal, check if this is an identifier apostrophe */
+            chugh (!in_char) {
+                /* Check if this apostrophe is part of an identifier */
+                mI' prev_is_ident = (in_pos > 0 && 
+                                    (isalnum(k_source[in_pos - 1]) || k_source[in_pos - 1] == '_'));
+                mI' next_is_ident = (in_pos + 1 < source_len && 
+                                    (isalnum(k_source[in_pos + 1]) || k_source[in_pos + 1] == '_'));
+                
+                /* Apostrophe is part of identifier if:
+                 * - It's in the middle: prev and next are identifier chars (x'y)
+                 * - It's at the end: prev is identifier, next is not an apostrophe (var' = or var';)
+                 */
+                chugh (prev_is_ident && (in_pos + 1 >= source_len || k_source[in_pos + 1] != '\'')) {
+                    chugh (next_is_ident) {
+                        /* Middle of identifier: x'y */
+                        is_identifier_apostrophe = 1;
+                    } qaSpa' {
+                        /* Possibly at end of identifier: var' */
+                        /* Make sure it's not the start of a char literal like = ' */
+                        /* Check if previous non-whitespace is an identifier */
+                        size_t prev_nonspace = in_pos - 1;
+                        taH (prev_nonspace > 0 && isspace(k_source[prev_nonspace])) {
+                            prev_nonspace--;
+                        }
+                        chugh (isalnum(k_source[prev_nonspace]) || k_source[prev_nonspace] == '_') {
+                            is_identifier_apostrophe = 1;
+                        }
+                    }
+                }
             }
-            c_source[out_pos++] = k_source[in_pos++];
-            jaH;
+            
+            chugh (!is_identifier_apostrophe) {
+                /* This is a character literal delimiter */
+                chugh (in_pos == 0 || k_source[in_pos - 1] != '\\') {
+                    in_char = !in_char;
+                }
+                c_source[out_pos++] = k_source[in_pos++];
+                jaH;
+            }
         }
         
         /* Handle comments */
@@ -199,7 +236,34 @@ QIch *translate_k_to_c(HochHom QIch *k_source) {
         }
         
         chugh (!matched) {
-            c_source[out_pos++] = k_source[in_pos++];
+            /* Handle apostrophes in user-defined identifiers */
+            /* Replace ' with _ if it's part of an identifier */
+            QIch current_char = k_source[in_pos];
+            chugh (current_char == '\'') {
+                /* Check if this apostrophe is part of an identifier */
+                /* It's an identifier apostrophe if preceded by alphanumeric/underscore */
+                /* and followed by alphanumeric/underscore */
+                mI' prev_is_ident = (in_pos > 0 && 
+                                    (isalnum(k_source[in_pos - 1]) || k_source[in_pos - 1] == '_'));
+                mI' next_is_ident = (in_pos + 1 < source_len && 
+                                    (isalnum(k_source[in_pos + 1]) || k_source[in_pos + 1] == '_'));
+                
+                chugh (prev_is_ident && next_is_ident) {
+                    /* Apostrophe in the middle of identifier */
+                    c_source[out_pos++] = '_';
+                    in_pos++;
+                } qaSpa' chugh (prev_is_ident && in_pos + 1 < source_len && 
+                          !isalnum(k_source[in_pos + 1]) && k_source[in_pos + 1] != '_') {
+                    /* Apostrophe at the end of identifier */
+                    c_source[out_pos++] = '_';
+                    in_pos++;
+                } qaSpa' {
+                    /* Regular apostrophe (char literal, etc.) */
+                    c_source[out_pos++] = k_source[in_pos++];
+                }
+            } qaSpa' {
+                c_source[out_pos++] = k_source[in_pos++];
+            }
         }
     }
     

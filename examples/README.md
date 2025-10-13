@@ -53,6 +53,33 @@ gcc warrior.c -o warrior
 ./warrior
 ```
 
+### test_apostrophes.k
+Demonstrates apostrophe handling in user-defined identifiers:
+- Apostrophes at the end of identifiers
+- Apostrophes in the middle of identifiers
+- Multiple apostrophes in one identifier
+- Character literals with apostrophes
+- Keywords with apostrophes
+
+```bash
+../klang test_apostrophes.k -o test_apostrophes.c
+gcc test_apostrophes.c -o test_apostrophes
+./test_apostrophes
+```
+
+### test_edge_cases.k
+Comprehensive edge case testing including:
+- Keywords in strings and comments
+- Partial keyword matches
+- Nested structures
+- Multiple keywords per line
+
+```bash
+../klang test_edge_cases.k -o test_edge_cases.c
+gcc test_edge_cases.c -o test_edge_cases
+./test_edge_cases
+```
+
 ## Running All Examples
 
 From the main directory, run:
