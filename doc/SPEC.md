@@ -45,16 +45,104 @@ The following table shows the mapping between C keywords and K (Klingon) keyword
 
 Common C standard library functions also have Klingon equivalents:
 
-| C Function | K Function | 
-|------------|------------|
-| `printf` | `cha'` |
-| `scanf` | `Qoy'` |
-| `malloc` | `ngaS` |
-| `free` | `chImmoH` |
-| `strlen` | `nI'ghach` |
-| `strcmp` | `pIm` |
-| `strcpy` | `lagh` |
-| `main` | `wa'DIch` |
+### stdio.h (Input/Output Functions)
+
+| C Function | K Function | Klingon Meaning |
+|------------|------------|-----------------|
+| `printf` | `cha'` | show |
+| `scanf` | `Qoy'` | hear/listen |
+| `fprintf` | `cha'De'` | show to file |
+| `sprintf` | `cha'tlhegh` | show string |
+| `fopen` | `poSmoH` | open (file) |
+| `fclose` | `SoQmoH` | close (file) |
+| `fread` | `laD` | read |
+| `fwrite` | `ghItlhmoH` | write |
+| `fgets` | `Suq` | acquire/get |
+| `fputs` | `pol` | put |
+| `getchar` | `SuqQIch` | get character |
+| `putchar` | `polQIch` | put character |
+| `puts` | `ngh` | output/emit |
+
+### string.h (String Manipulation Functions)
+
+| C Function | K Function | Klingon Meaning |
+|------------|------------|-----------------|
+| `strlen` | `nI'ghach` | length |
+| `strcpy` | `lagh` | copy |
+| `strcmp` | `pIm` | compare |
+| `strcat` | `chel` | add/concatenate |
+| `strncpy` | `laghboq` | copy (limited) |
+| `strncmp` | `pImboq` | compare (limited) |
+| `strchr` | `tu'QIch` | find character |
+| `strrchr` | `tu'Qav` | find last |
+| `strstr` | `tu'tlhegh` | find string |
+| `strtok` | `SIH` | separate/tokenize |
+| `memcpy` | `laghHom` | copy memory |
+| `memmove` | `choHHom` | move memory |
+| `memset` | `qabHom` | set memory |
+| `memcmp` | `pImHom` | compare memory |
+
+### stdlib.h (General Utility Functions)
+
+| C Function | K Function | Klingon Meaning |
+|------------|------------|-----------------|
+| `malloc` | `ngaS` | allocate |
+| `free` | `chImmoH` | free/release |
+| `calloc` | `ngaSchu'` | allocate clear |
+| `realloc` | `ngaSchIm` | reallocate |
+| `exit` | `mej` | leave/exit |
+| `abort` | `mevmoH` | abort/stop |
+| `atoi` | `toDmI'` | parse number |
+| `atof` | `toDbu'` | parse float |
+| `atol` | `toDtIq` | parse long |
+| `rand` | `nap` | random |
+| `srand` | `qawmoH` | seed |
+| `qsort` | `wegh` | sort |
+| `bsearch` | `nejchu'` | binary search |
+
+### math.h (Mathematical Functions)
+
+| C Function | K Function | Klingon Meaning |
+|------------|------------|-----------------|
+| `sqrt` | `boqHa'mI'` | square root |
+| `pow` | `HoS` | power |
+| `abs` | `jompatlh` | absolute value |
+| `fabs` | `jombu'` | floating absolute |
+| `sin` | `maghwI'` | sine |
+| `cos` | `maghwI'cha'` | cosine |
+| `tan` | `maghwI'wej` | tangent |
+| `exp` | `jen` | exponential |
+| `log` | `naH` | logarithm |
+| `floor` | `bID` | floor |
+| `ceil` | `joq` | ceiling |
+
+### ctype.h (Character Handling Functions)
+
+| C Function | K Function | Klingon Meaning |
+|------------|------------|-----------------|
+| `isalpha` | `qaQIchQach` | is letter |
+| `isdigit` | `qaQIchmI'` | is digit |
+| `isalnum` | `qaQIchboq` | is alphanumeric |
+| `isspace` | `qaQIchpegh` | is space |
+| `isupper` | `qaQIchtIn` | is uppercase |
+| `islower` | `qaQIchmach` | is lowercase |
+| `toupper` | `QIchtIn` | to uppercase |
+| `tolower` | `QIchmach` | to lowercase |
+
+### time.h (Time Functions)
+
+| C Function | K Function | Klingon Meaning |
+|------------|------------|-----------------|
+| `time` | `poH` | time |
+| `clock` | `poHmI'` | clock/time measure |
+| `difftime` | `poHpIm` | time difference |
+| `strftime` | `poHcha'` | time format |
+
+### Special Functions
+
+| C Function | K Function | Klingon Meaning |
+|------------|------------|-----------------|
+| `main` | `wa'DIch` | first/primary |
 
 ## Example Programs
 

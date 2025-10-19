@@ -10,6 +10,7 @@ The K language compiler (`klang`) is a source-to-source translator that converts
 
 - **Semantically Identical to C**: K programs behave exactly like C programs
 - **Klingon Keywords**: All C keywords replaced with Klingon equivalents
+- **Extensive Standard Library Support**: 60+ stdlib functions translated including stdio, string, stdlib, math, ctype, and time functions
 - **Easy to Use**: Simple command-line interface
 - **Compatible**: Generates standard C code that works with any C compiler
 
@@ -79,7 +80,7 @@ Some common keyword translations:
 | `printf` | `cha'` | show |
 | `main` | `wa'DIch` | first/primary |
 
-For a complete list of keywords and more examples, see [SPEC.md](SPEC.md).
+For a complete list of keywords and 60+ standard library function translations, see [SPEC.md](doc/SPEC.md).
 
 ## Identifier Naming
 
@@ -98,6 +99,8 @@ The `examples/` directory contains sample K programs:
 - `hello.k` - Hello World
 - `fib.k` - Fibonacci sequence
 - `loops.k` - Loops and conditionals
+- `warrior.k` - Comprehensive example with structs and functions
+- `stdlib_test.k` - Demonstrates 60+ standard library function translations
 
 Run all examples with:
 ```bash
