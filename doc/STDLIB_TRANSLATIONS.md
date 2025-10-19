@@ -5,7 +5,7 @@ This document provides a comprehensive list of all C standard library functions 
 ## Summary Statistics
 
 - **Total stdlib functions**: 60+
-- **Categories covered**: 5 (stdio, string, stdlib, math, ctype, time)
+- **Categories covered**: 6 (stdio, string, stdlib, math, ctype, time)
 - **Previously translated**: 8 functions
 - **Newly added**: 60+ functions
 

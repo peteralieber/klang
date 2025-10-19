@@ -53,21 +53,6 @@ gcc warrior.c -o warrior
 ./warrior
 ```
 
-### warrior.k
-Comprehensive example demonstrating:
-- Struct definitions (`qach`)
-- Pointers
-- For loops
-- If/else chains
-- Function definitions
-- String operations
-
-```bash
-../klang warrior.k -o warrior.c
-gcc warrior.c -o warrior
-../warrior
-```
-
 ### stdlib_test.k
 **NEW** Comprehensive test demonstrating 60+ standard library function translations:
 - stdio.h functions: `printf`, `sprintf`, `fgets`, etc.
