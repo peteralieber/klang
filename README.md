@@ -4,7 +4,7 @@ K is a programming language that is semantically identical to C, but uses Klingo
 
 ## Version
 
-Current version: **1.0.0**
+Current version: **0.0.1**
 
 To check the version:
 ```bash

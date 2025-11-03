@@ -3,7 +3,7 @@
 #include <string.h>
 #include <ctype.h>
 
-#define KLANG_VERSION "1.0.0"
+#define KLANG_VERSION "0.0.1"
 
 /* Keyword mapping structure */
 typedef struct {
