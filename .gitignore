@@ -68,3 +68,5 @@ examples/loops
 examples/warrior
 examples/test_edge_cases
 examples/test_apostrophes
+examples/stdlib_test
+examples/file_io
