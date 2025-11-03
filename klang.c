@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 
+#define KLANG_VERSION "1.0.0"
+
 /* Keyword mapping structure */
 typedef struct {
     const char *k_keyword;
@@ -350,7 +352,14 @@ int main(int argc, char *argv[]) {
     if (argc < 2) {
         fprintf(stderr, "Usage: %s <input.k> [-o output.c]\n", argv[0]);
         fprintf(stderr, "  Translates K language source code to C source code\n");
+        fprintf(stderr, "  -v, --version    Display version information\n");
         return 1;
+    }
+    
+    /* Check for version flag */
+    if (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "--version") == 0) {
+        printf("klang version %s\n", KLANG_VERSION);
+        return 0;
     }
     
     const char *input_file = argv[1];

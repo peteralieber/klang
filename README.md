@@ -2,6 +2,15 @@
 
 K is a programming language that is semantically identical to C, but uses Klingon terms for keywords and common programming constructs. It's perfect for Klingon warriors who want to write code in their native tongue!
 
+## Version
+
+Current version: **1.0.0**
+
+To check the version:
+```bash
+./klang --version
+```
+
 ## Overview
 
 The K language compiler (`klang`) is a source-to-source translator that converts K language code to standard C code, which can then be compiled with any C compiler.
