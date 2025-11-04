@@ -1,16 +1,21 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c99 -O2
 TARGET = klang
+C2K_TARGET = c2k
 
-.PHONY: all clean test
+.PHONY: all clean test test-c2k
 
-all: $(TARGET)
+all: $(TARGET) $(C2K_TARGET)
 
 $(TARGET): klang.c
 	$(CC) $(CFLAGS) -o $(TARGET) klang.c
 
+$(C2K_TARGET): c2k.k $(TARGET)
+	./$(TARGET) c2k.k -o c2k.c
+	$(CC) $(CFLAGS) -o $(C2K_TARGET) c2k.c
+
 clean:
-	rm -f $(TARGET) output.c examples/*.c examples/hello examples/fib
+	rm -f $(TARGET) $(C2K_TARGET) c2k.c output.c output.k examples/*.c examples/hello examples/fib
 
 test: $(TARGET)
 	@echo "Testing K language compiler..."
@@ -25,3 +30,16 @@ test: $(TARGET)
 	@./examples/fib
 	@echo ""
 	@echo "All tests passed!"
+
+test-c2k: $(C2K_TARGET)
+	@echo "Testing C-to-K converter..."
+	@./$(C2K_TARGET) examples/hello.c -o /tmp/hello_c2k.k
+	@echo "Converted C to K:"
+	@cat /tmp/hello_c2k.k
+	@echo ""
+	@./$(TARGET) /tmp/hello_c2k.k -o /tmp/hello_c2k.c
+	@$(CC) /tmp/hello_c2k.c -o /tmp/hello_c2k
+	@echo "Running converted program:"
+	@/tmp/hello_c2k
+	@echo ""
+	@echo "C-to-K converter test passed!"

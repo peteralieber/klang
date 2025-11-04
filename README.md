@@ -15,6 +15,8 @@ To check the version:
 
 The K language compiler (`klang`) is a source-to-source translator that converts K language code to standard C code, which can then be compiled with any C compiler.
 
+Additionally, the C-to-K converter (`c2k`) performs the reverse operation, translating standard C code into K language code.
+
 ## Features
 
 - **Semantically Identical to C**: K programs behave exactly like C programs
@@ -22,6 +24,7 @@ The K language compiler (`klang`) is a source-to-source translator that converts
 - **Extensive Standard Library Support**: 60+ stdlib functions translated including stdio, string, stdlib, math, ctype, and time functions
 - **Easy to Use**: Simple command-line interface
 - **Compatible**: Generates standard C code that works with any C compiler
+- **C-to-K Converter**: Convert existing C codebases to K language
 
 ## Installation
 
@@ -31,7 +34,7 @@ Build the compiler using make:
 make
 ```
 
-This creates the `klang` executable.
+This creates the `klang` executable and the `c2k` (C-to-K converter) executable.
 
 ### K Language Version
 
@@ -40,6 +43,8 @@ A version of the compiler written in K language itself (`klang.k`) is included i
 The `klang.k` file serves as a comprehensive example of K language syntax and demonstrates that the language is capable of expressing complex programs like compilers.
 
 ## Usage
+
+### K-to-C Translation
 
 Translate a K source file to C:
 
@@ -53,6 +58,24 @@ Then compile the generated C file:
 gcc output.c -o program
 ./program
 ```
+
+### C-to-K Translation
+
+Convert existing C code to K language:
+
+```bash
+./c2k input.c -o output.k
+```
+
+Then compile with klang:
+
+```bash
+./klang output.k -o output.c
+gcc output.c -o program
+./program
+```
+
+For more details on the C-to-K converter, see [doc/C2K_README.md](doc/C2K_README.md).
 
 ## Example: Hello World
 
