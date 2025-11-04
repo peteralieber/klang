@@ -59,16 +59,23 @@ def generate_k_header(keywords, output_file):
     
     with open(output_file, 'w') as f:
         f.write("/* Auto-generated from keywords.dict - DO NOT EDIT MANUALLY */\n")
+        f.write("/* nIDngan Hol: keywords.dict vo' chenmoHta' - pabHa' choHQo' */\n")
         f.write("/* C to K keyword mappings for c2k */\n")
+        f.write("/* nIDngan Hol: c2k vaD C vo' K pong ja'chuq */\n")
         f.write("/* .n = nach (Klingon for \"header\") - using first letter 'n' */\n")
-        f.write("/* This file uses C syntax so it works in both c2k.k and c2k.c */\n\n")
+        f.write("/* nIDngan Hol: .n = nach (\"nach\" 'oH tlhIngan Hol) - wa'DIch QIch 'n' lo' */\n")
+        f.write("/* This file uses C syntax so it works in both c2k.k and c2k.c */\n")
+        f.write("/* nIDngan Hol: De'wI' vam C ghogh lo', vaj c2k.k je c2k.c je Dochvam Qap */\n\n")
         f.write("/* Keyword mapping structure */\n")
+        f.write("/* nIDngan Hol: pong ja'chuq qach */\n")
         f.write("typedef struct {\n")
         f.write("    const char *c_keyword;\n")
         f.write("    const char *k_keyword;\n")
         f.write("} KeywordMap;\n\n")
         f.write("/* Keyword mappings from C to K (reverse of klang) */\n")
+        f.write("/* nIDngan Hol: C vo' K pong ja'chuqmey (klang choHchuq) */\n")
         f.write("/* Ordered by length (longest first) for proper matching */\n")
+        f.write("/* nIDngan Hol: nI'ghach wIv (wa'DIch nI'qu') pImchuq QaQ vaD */\n")
         f.write("static const KeywordMap keywords[] = {\n")
         
         for k_kw, c_kw in sorted_keywords:
