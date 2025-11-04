@@ -67,7 +67,7 @@ c2k.c
 
 # Generated keyword headers (auto-generated from keywords.dict)
 keywords.h
-keywords.nac
+keywords.n
 
 # Generated C files from K sources
 examples/*.c

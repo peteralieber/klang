@@ -3,9 +3,9 @@
 Generate keyword mapping headers from the master dictionary.
 This script reads keywords.dict and generates:
   - keywords.h (C header for klang.c)
-  - keywords.nac (K header for c2k.k)
+  - keywords.n (K header for c2k.k)
   
-'nac' comes from "nach" - Klingon for "header" or "head"
+'.n' comes from "nach" - Klingon for "header" (using first letter)
 """
 
 import sys
@@ -60,7 +60,7 @@ def generate_k_header(keywords, output_file):
     with open(output_file, 'w') as f:
         f.write("/* Auto-generated from keywords.dict - DO NOT EDIT MANUALLY */\n")
         f.write("/* C to K keyword mappings for c2k */\n")
-        f.write("/* nac = nach (Klingon for \"header\") */\n")
+        f.write("/* .n = nach (Klingon for \"header\") - using first letter 'n' */\n")
         f.write("/* This file uses C syntax so it works in both c2k.k and c2k.c */\n\n")
         f.write("/* Keyword mapping structure */\n")
         f.write("typedef struct {\n")
@@ -81,7 +81,7 @@ def main():
     script_dir = Path(__file__).parent
     dict_file = script_dir / 'keywords.dict'
     c_header = script_dir / 'keywords.h'
-    k_header = script_dir / 'keywords.nac'
+    k_header = script_dir / 'keywords.n'
     
     print(f"Reading dictionary from: {dict_file}")
     keywords = parse_dictionary(dict_file)
@@ -90,7 +90,7 @@ def main():
     print(f"Generating C header for klang: {c_header}")
     generate_c_header(keywords, c_header)
     
-    print(f"Generating K-compatible header (nac) for c2k: {k_header}")
+    print(f"Generating K-compatible header (.n) for c2k: {k_header}")
     generate_k_header(keywords, k_header)
     
     print("Done!")

@@ -9,22 +9,22 @@ KEYWORD_GEN = python3 generate_keywords.py
 all: $(TARGET) $(C2K_TARGET)
 
 # Generate keyword headers from master dictionary
-keywords: keywords.h keywords.nac
+keywords: keywords.h keywords.n
 
-keywords.h keywords.nac: keywords.dict generate_keywords.py
+keywords.h keywords.n: keywords.dict generate_keywords.py
 	@echo "Generating keyword headers from master dictionary..."
 	@$(KEYWORD_GEN)
 
 $(TARGET): klang.c keywords.h
 	$(CC) $(CFLAGS) -o $(TARGET) klang.c
 
-$(C2K_TARGET): c2k.k keywords.nac $(TARGET)
+$(C2K_TARGET): c2k.k keywords.n $(TARGET)
 	./$(TARGET) c2k.k -o c2k.c
 	$(CC) $(CFLAGS) -o $(C2K_TARGET) c2k.c
 
 clean:
 	rm -f $(TARGET) $(C2K_TARGET) c2k.c output.c output.k examples/*.c examples/hello examples/fib
-	rm -f keywords.h keywords.nac
+	rm -f keywords.h keywords.n
 
 test: $(TARGET)
 	@echo "Testing K language compiler..."

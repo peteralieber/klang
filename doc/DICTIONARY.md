@@ -11,11 +11,11 @@ The K language uses a **single master dictionary** (`keywords.dict`) to maintain
 - **`keywords.dict`** - Master dictionary containing all C ↔ K mappings (human-editable)
 - **`generate_keywords.py`** - Python script that generates headers from the dictionary
 - **`keywords.h`** - Auto-generated C header for `klang.c` (K → C mappings)
-- **`keywords.nac`** - Auto-generated header for `c2k.k` and `c2k.c` (C → K mappings)
+- **`keywords.n`** - Auto-generated header for `c2k.k` and `c2k.c` (C → K mappings)
 
-## The .nac Extension
+## The .n Extension
 
-The `.nac` extension comes from **"nach"** - the Klingon word for "header" or "head". This Klingon-themed extension fits the project's naming convention.
+The `.n` extension comes from **"nach"** - the Klingon word for "header" or "head", using the first letter 'n'. This Klingon-themed extension fits the project's naming convention.
 
 ## How It Works
 
@@ -50,7 +50,7 @@ To add or modify a keyword mapping:
 
 The Makefile automatically:
 1. Detects changes to `keywords.dict` or `generate_keywords.py`
-2. Regenerates `keywords.h` and `keywords.nac` before compilation
+2. Regenerates `keywords.h` and `keywords.n` before compilation
 3. Compiles both tools with the fresh headers
 
 ## Technical Details
@@ -61,14 +61,14 @@ The Makefile automatically:
 - Maps from Klingon keywords to C keywords
 - Example: `{"mI'", "int"}`
 
-### keywords.nac (for c2k.k and c2k.c)
+### keywords.n (for c2k.k and c2k.c)
 - Contains C → K mappings  
 - Uses C `typedef struct` syntax (not K syntax)
 - Sorted by C keyword length (longest first) for proper matching
 - Example: `{"int", "mI'"}`
 - Works in both c2k.k (before translation) and c2k.c (after translation)
 
-The `.nac` file uses C syntax intentionally so that:
+The `.n` file uses C syntax intentionally so that:
 1. When included in `c2k.k`, klang can translate it during compilation
 2. When included in `c2k.c`, gcc can compile it directly
 

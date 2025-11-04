@@ -11,8 +11,8 @@
 #define BACKSLASH 92 /* \ */
 
 /* Include auto-generated keyword mappings */
-/* nac = nach (Klingon for "header") */
-#include "keywords.nac"
+/* .n = nach (Klingon for "header") - using first letter 'n' */
+#include "keywords.n"
 
 /* Check if a character can be part of an identifier */
 mI' is_identifier_char(QIch c) {
