@@ -158,6 +158,7 @@ For a complete list of keyword and function mappings, see [SPEC.md](../doc/SPEC.
 2. **Preprocessor Directives**: `#include`, `#define`, etc. are preserved unchanged
 3. **Comments**: Comments remain in their original language (not translated to Klingon)
 4. **Type Names**: Custom type names are preserved (only C keywords are translated)
+5. **Escape Sequences**: Due to a known limitation in the klang parser, character literals with certain escape sequences (like `'\n'`, `'\t'`, `'\\'`) may cause parsing issues when c2k.k is compiled with klang. This can result in some keywords after such literals not being translated. Simple escape sequences like `\"` in strings work correctly. This is a klang parser bug that affects both the klang compiler and c2k when compiled with klang.
 
 ## Implementation Notes
 

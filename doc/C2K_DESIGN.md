@@ -137,6 +137,7 @@ mI' warrior'strength = 100;
 2. **Comments in Klingon**: Comments remain in their original language
 3. **Semantic equivalence only**: The output is a direct lexical translation
 4. **No type checking**: The tool doesn't validate C code correctness
+5. **Escape sequence handling**: The c2k tool (when compiled with klang) inherits klang's known limitation with complex escape sequences. Character literals with escape sequences like `'\n'`, `'\t'`, or `'\\'` may cause the parser to incorrectly track string/character literal state, leading to some keywords not being translated. This is a klang parser bug that affects both klang and c2k. Simple escape sequences like `\"` in strings work correctly.
 
 ## Future Enhancements
 
@@ -145,3 +146,4 @@ mI' warrior'strength = 100;
 3. Batch conversion mode for multiple files
 4. Integration with klang as a subcommand (klang --reverse)
 5. Pretty-printing and formatting options
+6. Improved escape sequence handling (requires fixing the underlying klang parser)
