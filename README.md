@@ -125,6 +125,10 @@ mI' warrior'count = 5;  // Becomes: int warrior_count = 5;
 
 See [SPEC.md](doc/SPEC.md) for more details.
 
+## Keyword Dictionary
+
+Both `klang` and `c2k` share a **single master dictionary** (`keywords.dict`) for all keyword mappings. This ensures consistency and makes it easy to add or modify translations. See [DICTIONARY.md](doc/DICTIONARY.md) for details on the dictionary system.
+
 ## Examples
 
 The `examples/` directory contains sample K programs:
