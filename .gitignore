@@ -59,6 +59,15 @@ klang
 klang_from_k
 klang_from_k.c
 output.c
+output.k
+
+# C-to-K converter
+c2k
+c2k.c
+
+# Generated keyword headers (auto-generated from keywords.dict)
+keywords.h
+keywords.n
 
 # Generated C files from K sources
 examples/*.c
@@ -70,3 +79,5 @@ examples/test_edge_cases
 examples/test_apostrophes
 examples/stdlib_test
 examples/file_io
+examples/test_c2k_prog
+examples/test_c2k_roundtrip.c
